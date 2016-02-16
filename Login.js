@@ -8,30 +8,76 @@ import React, {
     View,
     Image,
     TextInput,
-    TouchableHighlight
+    TouchableHighlight,
+    ActivityIndicatorIOS
     } from 'react-native';
 
-var Login = React.createClass({
-    render : function(){
+class Login extends Component{
+    constructor(props){
+        super(props);
+
+        this.state = {loginInProgress: false}
+    }
+
+    render(){
+        var errorCtr = < View />
+
+        if(!this.state.loginSuccess && this.state.badCredentials){
+            errorCtr = <Text style={styles.error}>
+                The username and password combination did not work!
+                </Text>;
+        }
+        if(!this.state.loginSuccess && this.state.unknownError){
+            errorCtr = <Text style={styles.error}>
+                We face some difficulties, please try again!
+            </Text>;
+        }
+
         return (
             <View style={styles.container}>
                 <Text style={styles.heading}>Github Browser</Text>
                 <Image style={styles.logo}
                     source={require('image!Octocat')} />
                 <TextInput style={styles.input}
-                    placeholder="Github username" />
+                    onChangeText = {(text)=> this.setState({username: text})}
+                    placeholder="Your Github username" />
                 <TextInput style={styles.input}
-                    placeholder="Github password"
+                    onChangeText = {(password)=> this.setState({password: password})}
+                    placeholder="Your Github password"
                     secureTextEntry={true} />
-                <TouchableHighlight style={styles.button}>
+                <TouchableHighlight style={styles.button}
+                    onPress={this.onLoginPressed.bind(this)}>
                     <Text style={styles.buttonText}>
                         Login
                     </Text>
                 </TouchableHighlight>
+
+                {errorCtr}
+
+                <ActivityIndicatorIOS
+                    animating={this.state.loginInProgress}
+                    size='large'
+                    style= {styles.loader} />
             </View>
         );
     }
-});
+
+    onLoginPressed(){
+        this.setState({loginInProgress : true})
+
+        var authService = require('./AuthService')
+        authService.login(
+            {username: this.state.username, password: this.state.password},
+            (results) => {
+                this.setState(Object.assign({loginInProgress: false}, results))
+
+                if(results.loginSuccess && this.props.onLogin){
+                    this.props.onLogin()
+                }
+            }
+        )
+    }
+}
 
 //Colors Sheet
 var academicCircleBlueColor = '#ececff';// '#28618e';
@@ -75,6 +121,14 @@ var styles = StyleSheet.create({
         fontSize: 18,
         color: 'white',
         fontWeight: 'bold'
+    },
+    loader: {
+        padding: 20
+    },
+    error: {
+        color: 'red',
+        fontWeight: 'bold',
+        textAlign: 'center'
     }
 })
 
