@@ -14,40 +14,39 @@ import React, {
 
 var Login = require('./Login.js')
 var AuthService = require('./AuthService')
+var AppContainer = require('./AppContainer')
 
 class GithubBrowser extends Component {
-    constructor(props){
-        super(props)
-        this.state = {isLoggedIn : false, checkinAuth: true}
-        this.onLogin = this.onLogin.bind(this)
-    }
-
     //Called only one time, once the component is loaded
     componentDidMount(){
         AuthService.getAuthInfo((err, authInfo)=>{
             this.setState({
-                checkinAuth:false,
+                checkingAuth: false,
                 isLoggedIn: authInfo != null
             })
         })
     }
 
+    constructor(props){
+        super(props)
+        this.state = {isLoggedIn : false, checkingAuth: true}
+        this.onLogin = this.onLogin.bind(this)
+    }
+
     render() {
-        if(this.state.checkinAuth){
+        if(this.state.checkingAuth){
             return(
                 <View style={styles.container}>
                     <ActivityIndicatorIOS
                         animation={true}
                         size='large'
-                        style={styles.loader}
-                        />
+                        style={styles.loader} />
                 </View>
             )
-        } else if(this.state.isLoggedIn){
+        }
+        if(this.state.isLoggedIn){
             return(
-                <View style={styles.container}>
-                    <Text style={styles.welcome}>You're logged in</Text>
-                </View>
+                <AppContainer />
             )
         } else {
             return (

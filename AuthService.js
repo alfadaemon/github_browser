@@ -24,7 +24,7 @@ class AuthService {
                 if(!val)
                     return cb()
 
-                var zippedObj = _.zipObject(val)
+                var zippedObj = _.zipObject(val[0],val[1])
 
                 if(!zippedObj[authKey])
                     return cb()
@@ -33,9 +33,7 @@ class AuthService {
                     header:{
                         Authorization : 'Basic '+zippedObj[authKey]
                     },
-                    user:{
-                        user: JSON.parse(zippedObj[userKey])
-                    }
+                    user: JSON.parse(zippedObj[userKey])
                 }
 
                 return cb(null, authInfo)
@@ -65,16 +63,17 @@ class AuthService {
                 return response.json()
             })
             .then((results)=>{
-                AsyncStorage.multiSet([
-                    [authKey,encodedAuth],
-                    [userKey, JSON.stringify(results)]
-                ], (err)=>{
-                    if(err){
-                        throw err
-                    }
-
-                    return cb({loginSuccess: true})
-                })
+                AsyncStorage.multiSet(
+                    [
+                        [authKey, userKey],
+                        [encodedAuth, JSON.stringify(results)]
+                    ],
+                    (err)=>{
+                        if(err){
+                            throw err
+                        }
+                        return cb({loginSuccess: true})
+                    })
             })
             .catch((err)=>{
                 return cb(err)
