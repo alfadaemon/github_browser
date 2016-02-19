@@ -10,7 +10,7 @@ import React, {
     Text,
     View,
     ActivityIndicatorIOS
-    } from 'react-native';
+} from 'react-native';
 
 var Login = require('./Login.js')
 var AuthService = require('./AuthService')

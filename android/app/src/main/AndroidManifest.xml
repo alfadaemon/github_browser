@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.githubnav">
+=======
+    package="com.githubbrowser">
+>>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
 
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -42,8 +42,13 @@
 -keep class * extends com.facebook.react.bridge.NativeModule { *; }
 -keepclassmembers,includedescriptorclasses class * { native <methods>; }
 -keepclassmembers class *  { @com.facebook.react.uimanager.UIProp <fields>; }
+<<<<<<< HEAD
 -keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactProp <methods>; }
 -keepclassmembers class *  { @com.facebook.react.uimanager.annotations.ReactPropGroup <methods>; }
+=======
+-keepclassmembers class *  { @com.facebook.react.uimanager.ReactProp <methods>; }
+-keepclassmembers class *  { @com.facebook.react.uimanager.ReactPropGroup <methods>; }
+>>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
 
 -dontwarn com.facebook.react.**
 

@@ -1,3 +1,7 @@
 <resources>
+<<<<<<< HEAD
     <string name="app_name">GithubNav</string>
+=======
+    <string name="app_name">GithubBrowser</string>
+>>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
 </resources>
