@@ -28,21 +28,13 @@ class AppContainer extends Component{
                     title="Feed"
                     selected={this.state.selectedTab=='feed'}
                     onPress={()=>this.setState({selectedTab: 'feed'})}>
-<<<<<<< HEAD
                     <Text style={styles.welcome}> This is the Feed tab </Text>
-=======
-                    <Text style={styles.welcome}> This is Tab 1 </Text>
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Search"
                     selected={this.state.selectedTab=='search'}
                     onPress={()=>this.setState({selectedTab: 'search'})}>
-<<<<<<< HEAD
                     <Text style={styles.welcome}> This is the Search tab </Text>
-=======
-                    <Text style={styles.welcome}> This is Tab 2 </Text>
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
                 </TabBarIOS.Item>
             </TabBarIOS>
         )

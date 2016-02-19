@@ -11,11 +11,7 @@ import React, {
   View
 } from 'react-native';
 
-<<<<<<< HEAD
 class GithubNav extends Component {
-=======
-class GithubBrowser extends Component {
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
   render() {
     return (
       <View style={styles.container}>
@@ -52,8 +48,5 @@ const styles = StyleSheet.create({
   },
 });
 
-<<<<<<< HEAD
+
 AppRegistry.registerComponent('GithubNav', () => GithubNav);
-=======
-AppRegistry.registerComponent('GithubBrowser', () => GithubBrowser);
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017

@@ -15,11 +15,7 @@ const userKey = 'user'
 
 class AuthService {
     getAuthInfo(cb){
-<<<<<<< HEAD
         return AsyncStorage.multiGet(//multiGet(['k1', 'k2'], cb) -> cb([['k1', 'val1'], ['k2', 'val2']])
-=======
-        return AsyncStorage.multiGet(
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
             [authKey,userKey],
             (err, val)=>{
                 if(err)
@@ -28,11 +24,7 @@ class AuthService {
                 if(!val)
                     return cb()
 
-<<<<<<< HEAD
                 var zippedObj = _.fromPairs(val) //zipObject(val[0],val[1])
-=======
-                var zippedObj = _.zipObject(val[0],val[1])
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
 
                 if(!zippedObj[authKey])
                     return cb()
@@ -71,16 +63,8 @@ class AuthService {
                 return response.json()
             })
             .then((results)=>{
-<<<<<<< HEAD
                 AsyncStorage.multiSet(//multiSet([['k1', 'val1'], ['k2', 'val2']], cb);
                     [[authKey, encodedAuth], [userKey, JSON.stringify(results)]],
-=======
-                AsyncStorage.multiSet(
-                    [
-                        [authKey, userKey],
-                        [encodedAuth, JSON.stringify(results)]
-                    ],
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
                     (err)=>{
                         if(err){
                             throw err
