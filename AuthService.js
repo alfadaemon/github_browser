@@ -41,6 +41,16 @@ class AuthService {
         )
     }
 
+    logout(cb){
+        AsyncStorage.multiRemove([authKey, userKey],
+            (err)=>{
+                if(err)
+                    throw err
+
+                return cb({isLoggedIn : false, checkingAuth: true})
+            })
+    }
+
     login(creds, cb){
         var b = new Buffer.Buffer(creds.username+':'+creds.password)
         var encodedAuth = b.toString('base64')

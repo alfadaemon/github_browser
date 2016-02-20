@@ -1,23 +1,13 @@
 {
-<<<<<<< HEAD
   "name": "GithubNav",
-=======
-  "name": "GithubBrowser",
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-<<<<<<< HEAD
   	"buffer": "^4.5.0",
     "lodash": "^4.4.0",
     "react-native": "^0.20.0"
-=======
-    "buffer": "^4.5.0",
-    "lodash": "^4.4.0",
-    "react-native": "^0.19.0"
->>>>>>> 8223c1c32a92a5a9e3b45b08185263b851f9b017
   }
 }

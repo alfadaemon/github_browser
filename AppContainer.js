@@ -9,8 +9,12 @@ import React, {
     StyleSheet,
     Text,
     View,
-    TabBarIOS
+    TabBarIOS,
+    TouchableHighlight,
+    ActivityIndicatorIOS
     } from 'react-native'
+
+var Login = require('./Login')
 
 class AppContainer extends Component{
     constructor(props){
@@ -22,6 +26,11 @@ class AppContainer extends Component{
     }
 
     render(){
+        if(this.state.checkingAuth){
+            return(
+                < Login />
+            )
+        }
         return(
             <TabBarIOS style={styles.container}>
                 <TabBarIOS.Item
@@ -36,8 +45,28 @@ class AppContainer extends Component{
                     onPress={()=>this.setState({selectedTab: 'search'})}>
                     <Text style={styles.welcome}> This is the Search tab </Text>
                 </TabBarIOS.Item>
+                <TabBarIOS.Item
+                    title="LogOut"
+                    selected={this.state.selectedTab=='logout'}
+                    onPress={this.onLogOutPressed.bind(this)}>
+                        <Text style={styles.buttonText}>
+                            LogOut
+                        </Text>
+                </TabBarIOS.Item>
             </TabBarIOS>
         )
+    }
+
+    onLogOutPressed(){
+        this.setState({loginInProgress : false})
+
+        var authService = require('./AuthService')
+        authService.logout(
+            (results) => {
+                this.setState(Object.assign({loginInProgress: false}, results))
+            }
+        )
+
     }
 }
 
