@@ -36,12 +36,14 @@ class AppContainer extends Component{
                 <TabBarIOS.Item
                     title="Feed"
                     selected={this.state.selectedTab=='feed'}
+                    systemIcon='most-recent'
                     onPress={()=>this.setState({selectedTab: 'feed'})}>
                     <Text style={styles.welcome}> This is the Feed tab </Text>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Search"
                     selected={this.state.selectedTab=='search'}
+                    systemIcon = 'search'
                     onPress={()=>this.setState({selectedTab: 'search'})}>
                     <Text style={styles.welcome}> This is the Search tab </Text>
                 </TabBarIOS.Item>
