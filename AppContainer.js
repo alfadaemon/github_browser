@@ -15,6 +15,7 @@ import React, {
     } from 'react-native'
 
 var Login = require('./Login')
+var Feed = require('./Feed')
 
 class AppContainer extends Component{
     constructor(props){
@@ -38,18 +39,20 @@ class AppContainer extends Component{
                     selected={this.state.selectedTab=='feed'}
                     systemIcon='most-recent'
                     onPress={()=>this.setState({selectedTab: 'feed'})}>
-                    <Text style={styles.welcome}> This is the Feed tab </Text>
+                    <Feed />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Search"
                     selected={this.state.selectedTab=='search'}
                     systemIcon = 'search'
+                    style={styles.searchBarItem}
                     onPress={()=>this.setState({selectedTab: 'search'})}>
                     <Text style={styles.welcome}> This is the Search tab </Text>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="LogOut"
                     selected={this.state.selectedTab=='logout'}
+                    style={styles.barItem}
                     onPress={this.onLogOutPressed.bind(this)}>
                         <Text style={styles.buttonText}>
                             LogOut
@@ -72,6 +75,8 @@ class AppContainer extends Component{
     }
 }
 
+var academicCircleBlueColor = '#28618e';
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -84,6 +89,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         textAlign: 'center',
         margin: 10
+    },
+    searchBarItem: {
+        backgroundColor: academicCircleBlueColor
     }
 })
 
