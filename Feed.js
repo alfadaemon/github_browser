@@ -11,11 +11,13 @@ import React, {
     View,
     ListView,
     ActivityIndicatorIOS,
-    Image
+    Image,
+    TouchableHighlight
     } from 'react-native'
 
 var AuthService = require('./AuthService')
 var moment = require('moment')
+var PushPayload = require('./PushPayload')
 
 class Feed extends React.Component{
     constructor(props){
@@ -94,29 +96,45 @@ class Feed extends React.Component{
     renderRow(rowData) {
         if (this.validateObj(rowData.id))
             return (
-                <View style={styles.row}>
-                    <Image
-                        source= {{uri:rowData.actor.avatar_url}}
-                        style= {styles.avatar}
-                        />
-                    <View style={styles.rowInfo}>
-                        <Text>
-                            {moment(rowData.created_at).fromNow()}
-                        </Text>
-                        <Text>
-                            {rowData.actor.login}
-                        </Text>
-                        <Text>
-                            {rowData.payload.ref.replace('refs/heads/','')}
-                        </Text>
-                        <Text style={styles.rowInfoRepository}>
-                            {rowData.repo.name}
-                        </Text>
+                <TouchableHighlight
+                    onPress={()=>this.pressRow(rowData)}
+                    underlayColor='#ddd'>
+                    <View style={styles.row}>
+                        <Image
+                            source= {{uri:rowData.actor.avatar_url}}
+                            style= {styles.avatar}
+                            />
+                        <View style={styles.rowInfo}>
+                            <Text>
+                                {moment(rowData.created_at).fromNow()}
+                            </Text>
+                            <Text>
+                                {rowData.actor.login}
+                            </Text>
+                            <Text>
+                                {rowData.payload.ref.replace('refs/heads/','')}
+                            </Text>
+                            <Text style={styles.rowInfoRepository}>
+                                {rowData.repo.name}
+                            </Text>
+                        </View>
                     </View>
-                </View>
+                </TouchableHighlight>
             )
         else
             return <Text style={styles.row}> {rowData} </Text>
+    }
+
+    pressRow(rowData){
+        //console.log('rowData: '+JSON.stringify(rowData))
+        this.props.navigator.push({
+                title: 'Push Event',
+                component: PushPayload,
+                passProps: {
+                    pushEvent: rowData
+                }
+            }
+        )
     }
 }
 
@@ -124,7 +142,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        paddingTop:20
+        paddingTop:60
     },
     loading: {
         flex:1,

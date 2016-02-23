@@ -11,7 +11,8 @@ import React, {
     View,
     TabBarIOS,
     TouchableHighlight,
-    ActivityIndicatorIOS
+    ActivityIndicatorIOS,
+    NavigatorIOS
     } from 'react-native'
 
 var Login = require('./Login')
@@ -39,7 +40,13 @@ class AppContainer extends Component{
                     selected={this.state.selectedTab=='feed'}
                     systemIcon='most-recent'
                     onPress={()=>this.setState({selectedTab: 'feed'})}>
-                    <Feed />
+                    <NavigatorIOS
+                        style={{flex:1}}
+                        initialRoute= {{
+                         component: Feed,
+                         title: 'Feed'
+                        }}
+                        />
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Search"
